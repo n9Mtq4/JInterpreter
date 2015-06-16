@@ -29,6 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -68,7 +69,7 @@ public class ReflectionHelper {
 	 */
 	public static int getInt(String fieldName, Object obj, Class clazz) {
 		try {
-			Field field = clazz.getDeclaredField(fieldName);
+			Field field = getAllDeclaredField(fieldName, clazz);
 			return getInt(field, obj);
 		}catch (NoSuchFieldException e) {
 			e.printStackTrace();
@@ -102,7 +103,7 @@ public class ReflectionHelper {
 	 */
 	public static void setInt(int x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setInt(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -156,7 +157,7 @@ public class ReflectionHelper {
 	 */
 	public static int getStaticInt(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticInt(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -188,7 +189,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticInt(int x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticInt(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -222,7 +223,7 @@ public class ReflectionHelper {
 	 */
 	public static byte getByte(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getByte(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -256,7 +257,7 @@ public class ReflectionHelper {
 	 */
 	public static void setByte(byte x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			f.setAccessible(true);
 			f.setByte(obj, x);
 		}catch (Exception e) {
@@ -311,7 +312,7 @@ public class ReflectionHelper {
 	 */
 	public static byte getStaticByte(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticByte(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -343,7 +344,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticByte(byte x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticByte(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -377,7 +378,7 @@ public class ReflectionHelper {
 	 */
 	public static boolean getBoolean(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getBoolean(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -411,7 +412,7 @@ public class ReflectionHelper {
 	 */
 	public static void setBoolean(boolean x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setBoolean(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -465,7 +466,7 @@ public class ReflectionHelper {
 	 */
 	public static boolean getStaticBoolean(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticBoolean(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -497,7 +498,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticBoolean(boolean x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticBoolean(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -531,7 +532,7 @@ public class ReflectionHelper {
 	 */
 	public static char getChar(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getChar(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -565,7 +566,7 @@ public class ReflectionHelper {
 	 */
 	public static void setChar(char x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setChar(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -619,7 +620,7 @@ public class ReflectionHelper {
 	 */
 	public static char getStaticChar(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticChar(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -651,7 +652,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticChar(char x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticChar(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -685,7 +686,7 @@ public class ReflectionHelper {
 	 */
 	public static float getFloat(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getFloat(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -719,7 +720,7 @@ public class ReflectionHelper {
 	 */
 	public static void setFloat(float x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setFloat(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -773,7 +774,7 @@ public class ReflectionHelper {
 	 */
 	public static float getStaticFloat(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticFloat(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -805,7 +806,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticFloat(float x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticFloat(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -839,7 +840,7 @@ public class ReflectionHelper {
 	 */
 	public static double getDouble(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getDouble(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -873,7 +874,7 @@ public class ReflectionHelper {
 	 */
 	public static void setDouble(double x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setDouble(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -927,7 +928,7 @@ public class ReflectionHelper {
 	 */
 	public static double getStaticDouble(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticDouble(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -959,7 +960,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticDouble(double x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticDouble(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -993,7 +994,7 @@ public class ReflectionHelper {
 	 */
 	public static long getLong(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getLong(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1027,7 +1028,7 @@ public class ReflectionHelper {
 	 */
 	public static void setLong(long x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setLong(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1081,7 +1082,7 @@ public class ReflectionHelper {
 	 */
 	public static long getStaticLong(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticLong(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1113,7 +1114,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticLong(long x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticLong(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1147,7 +1148,7 @@ public class ReflectionHelper {
 	 */
 	public static short getShort(String fieldName, Object obj, Class clazz) {
 		try {
-			Field field = clazz.getDeclaredField(fieldName);
+			Field field = getAllDeclaredField(fieldName, clazz);
 			return getShort(field, obj);
 		}catch (NoSuchFieldException e) {
 			e.printStackTrace();
@@ -1181,7 +1182,7 @@ public class ReflectionHelper {
 	 */
 	public static void setShort(short x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setShort(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1238,7 +1239,7 @@ public class ReflectionHelper {
 	 */
 	public static short getStaticShort(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticShort(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1271,7 +1272,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticShort(short x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticShort(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1305,7 +1306,7 @@ public class ReflectionHelper {
 	 */
 	public static <E> E getObject(String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getObject(f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1339,7 +1340,7 @@ public class ReflectionHelper {
 	 */
 	public static void setObject(Object x, String fieldName, Object obj, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setObject(x, f, obj);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1393,7 +1394,7 @@ public class ReflectionHelper {
 	 */
 	public static <E> E getStaticObject(String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			return getStaticObject(f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1425,7 +1426,7 @@ public class ReflectionHelper {
 	 */
 	public static void setStaticObject(Object x, String fieldName, Class clazz) {
 		try {
-			Field f = clazz.getDeclaredField(fieldName);
+			Field f = getAllDeclaredField(fieldName, clazz);
 			setStaticObject(x, f);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -1478,7 +1479,7 @@ public class ReflectionHelper {
 	public static <E> E callObjectMethod(String methodName, Object obj, Class clazz, Class[] classParams, Object[] params) {
 		Method m = null;
 		try {
-			m = clazz.getDeclaredMethod(methodName, classParams);
+			m = getAllDeclaredMethod(methodName, classParams, clazz);
 			m.setAccessible(true);
 			return (E) m.invoke(obj, params);
 		}catch (NoSuchMethodException e) {
@@ -2168,7 +2169,7 @@ public class ReflectionHelper {
 	public static long callStaticLongMethod(String methodName, Class clazz, Object... params) {
 		return callStaticLongMethod(methodName, clazz, getClassParams(params), params);
 	}
-	
+
 //	start stuff not written by me
 //	BrainStorm @ https://stackoverflow.com/questions/520328/can-you-find-all-classes-in-a-package-using-reflection
 	
@@ -2280,7 +2281,7 @@ public class ReflectionHelper {
 			}
 		}
 	}
-	
+
 //	end stuff not written by me
 	
 	/**
@@ -2345,6 +2346,77 @@ public class ReflectionHelper {
 		}
 	}
 	
+	
+	/**
+	 * This fixes the issue in java of getDeclaredFields not searching
+	 * the class's inherited methods.
+	 * */
+	public static Field[] getAllDeclaredFields(Class clazz) {
+		
+		ArrayList<Field> fields = new ArrayList<Field>();
+
+//		loop through all super classes until getSuperClass == null
+		Class currentClass = clazz;
+		while (currentClass != null) {
+			fields.addAll(Arrays.asList(currentClass.getDeclaredFields()));
+			currentClass = clazz.getSuperclass();
+		}
+		
+		Field[] fields1 = new Field[fields.size()];
+		System.arraycopy(fields.toArray(), 0, fields1, 0, fields.size());
+		return fields1;
+		
+	}
+	
+	/**
+	 * Get a field by name. Also searches inherited fields.
+	 * */
+	public static Field getAllDeclaredField(String name, Class clazz) throws NoSuchFieldException {
+		Class currentClass = clazz;
+		while (currentClass != null) {
+			try {
+				
+				Field f = currentClass.getDeclaredField(name);
+				return f;
+				
+			}catch (NoSuchFieldException e) {
+			}
+			currentClass = currentClass.getSuperclass();
+		}
+		
+		throw new NoSuchFieldException(name);
+	}
+	
+	public static Method[] getAllDeclaredMethods(Class clazz) {
+		ArrayList<Field> methods = new ArrayList<Field>();
+
+//		loop through all super classes until getSuperClass == null
+		Class currentClass = clazz;
+		while (currentClass != null) {
+			methods.addAll(Arrays.asList(currentClass.getDeclaredFields()));
+			currentClass = clazz.getSuperclass();
+		}
+		
+		Method[] methods1 = new Method[methods.size()];
+		System.arraycopy(methods.toArray(), 0, methods1, 0, methods.size());
+		return methods1;
+	}
+	
+	public static Method getAllDeclaredMethod(String name, Class[] params, Class clazz) throws NoSuchMethodException {
+		Class currentClass = clazz;
+		while (currentClass != null) {
+			try {
+				
+				Method m = currentClass.getDeclaredMethod(name, params);
+				return m;
+				
+			}catch (NoSuchMethodException e) {
+			}
+			currentClass = currentClass.getSuperclass();
+		}
+		throw new NoSuchMethodException(name);
+	}
+	
 	/**
 	 * Get class params.
 	 *
@@ -2354,9 +2426,40 @@ public class ReflectionHelper {
 	public static Class[] getClassParams(Object[] params) {
 		Class[] classParams = new Class[params.length];
 		for (int i = 0; i < classParams.length; i++) {
-			classParams[i] = params[i].getClass();
+			Class clazz = params[i].getClass();
+			if (isPrimitive(clazz)) {
+				classParams[i] = getPrimitive(clazz);
+			}else {
+				classParams[i] = clazz;
+			}
 		}
 		return classParams;
+	}
+	
+	public static boolean isPrimitive(Class clazz) {
+		return getPrimitive(clazz) != null;
+	}
+	
+	/**
+	 * Primitive types have two classes in java.
+	 * The primitive one (ie. int.class) and the 
+	 * Object one (ie. Integer.class).
+	 * This takes the Object one (ie. Integer.class)
+	 * and returns a primitive one (ie. int.class)
+	 *
+	 * @param clazz The Object class to get the primitive version
+	 * @return The Primitive version, or null if there isn't one   
+	 * */
+	public static Class getPrimitive(Class clazz) {
+		if (clazz == Boolean.class) return boolean.class;
+		if (clazz == Byte.class) return byte.class;
+		if (clazz == Character.class) return char.class;
+		if (clazz == Double.class) return double.class;
+		if (clazz == Float.class) return float.class;
+		if (clazz == Long.class) return long.class;
+		if (clazz == Short.class) return short.class;
+		if (clazz == Integer.class) return int.class;
+		return null;
 	}
 	
 }

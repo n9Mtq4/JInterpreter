@@ -23,7 +23,7 @@ public class JPSwingRuntime {
 		
 	}
 	
-	private JPSwingVariable getVariableByName(String name) {
+	public JPSwingVariable getVariableByName(String name) {
 		
 		for (JPSwingVariable variable : variables) {
 			if (variable.getName().equals(name)) return variable;

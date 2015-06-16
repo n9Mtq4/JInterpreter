@@ -1,4 +1,4 @@
-package com.n9mtq4.jpswing;
+package com.n9mtq4.jpswing.listener;
 
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
@@ -14,7 +14,8 @@ public class JPSwingMainListener extends ConsoleListener {
 	public void onAddition(AdditionActionEvent e) {
 		
 		BaseConsole bc = e.getBaseConsole();
-		bc.addListener(new VariableCreateListener());
+		bc.addListener(new VariableCreator());
+		bc.addListener(new MethodExecutor());
 		
 	}
 	

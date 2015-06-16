@@ -1,4 +1,4 @@
-package com.n9mtq4.jpswing;
+package com.n9mtq4.jpswing.runtime;
 
 import java.util.ArrayList;
 

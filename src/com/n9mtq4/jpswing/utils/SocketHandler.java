@@ -1,6 +1,7 @@
-package com.n9mtq4.jpswing;
+package com.n9mtq4.jpswing.utils;
 
 import com.n9mtq4.console.lib.gui.GuiSocket;
+import com.n9mtq4.jpswing.JPSwing;
 
 /**
  * Created by will on 6/14/15 at 8:48 PM.

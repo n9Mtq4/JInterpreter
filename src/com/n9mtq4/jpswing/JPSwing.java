@@ -2,6 +2,8 @@ package com.n9mtq4.jpswing;
 
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.gui.GuiScanner;
+import com.n9mtq4.jpswing.listener.JPSwingMainListener;
+import com.n9mtq4.jpswing.runtime.JPSwingRuntime;
 
 /**
  * Created by will on 6/14/15 at 8:44 PM.

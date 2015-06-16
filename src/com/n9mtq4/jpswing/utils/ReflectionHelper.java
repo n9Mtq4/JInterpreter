@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.n9mtq4.jpswing;
+package com.n9mtq4.jpswing.utils;
 
 import sun.net.www.protocol.file.FileURLConnection;
 

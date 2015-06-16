@@ -44,13 +44,16 @@ public class VariableCreator extends ConsoleListener {
 				
 //				first, just in case the string is one word
 				if (consoleActionEvent.getCommand().getArg(i).endsWith("\"")) {
-					
+					args.add(consoleActionEvent.getCommand().getArg(i).substring(1, consoleActionEvent.getCommand().getArg(1).length() - 1)); //ADDS ARGUMENT
 				}
 				
 			}else if (consoleActionEvent.getCommand().getArg(i).startsWith("{") && consoleActionEvent.getCommand().getArg(i).endsWith("}")) {
 //				variable
 				
-				
+//				get rid of { and }, or first and last char
+				String eVarName = consoleActionEvent.getCommand().getArg(i).substring(1, consoleActionEvent.getCommand().getArg(1).length() - 1);
+				JPSwingVariable eVar = JPSwing.instance.getRuntime().getVariableByName(eVarName);
+				args.add(eVar.getValue()); //ADDS ARGUMENT
 				
 			}else {
 //				number or boolean

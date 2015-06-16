@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="LogWindowAPI">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../console/LogWindowAPI.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

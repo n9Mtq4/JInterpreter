@@ -10,7 +10,7 @@ import com.n9mtq4.jpswing.runtime.JPSwingRuntime;
  */
 public class JPSwing {
 	
-	public static final int PORT = 4545;
+	public static final int PORT = 45454;
 	
 	public static JPSwing instance;
 	

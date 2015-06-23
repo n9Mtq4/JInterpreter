@@ -1,6 +1,10 @@
 package com.n9mtq4.jpswing.runtime;
 
+import com.n9mtq4.console.lib.utils.ReflectionHelper;
 import com.n9mtq4.jpswing.JPSwing;
+
+import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Created by will on 6/15/15 at 9:51 PM.
@@ -8,32 +12,52 @@ import com.n9mtq4.jpswing.JPSwing;
 public class JPSwingParseArg {
 	
 	public static Object[] parseArgs(int startIndex, String[] allArg, String allArgs) {
-		return new Object[] {true};
+		ArrayList<Object> objects = new ArrayList<>();
+		for (int i = startIndex; i < allArg.length; i++) {
+			try {
+				ParseArgReturn result = parseArg(allArg[i], i, allArg, allArgs);
+				i = result.getIndex();
+				objects.add(result.getEval());
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		Object[] objects1 = new Object[objects.size()];
+		System.arraycopy(objects.toArray(), 0, objects1, 0, objects.size());
+		return objects1;
 	}
 	
 	public static ParseArgReturn parseArg(String arg, int index, String[] allArg, String allArgs) throws Exception {
 		
-//		TODO: migrate from VariableCreator
-		
-		
-		if (arg.contains("\"")) {
+		if (arg.startsWith("\"")) {
 //			String
 			
 //			if the string is one word
 			if (arg.endsWith("\"")) {
 				String eString = arg.substring(1, arg.length() - 1); //crop off " and "
-				return new ParseArgReturn<>(index, eString);
+				return new ParseArgReturn<String>(index, eString);
 			}
 			
 //			if it is more than one word, we have to search through allArgs.
-//			TODO: loop
+//			TODO: support for double spaces
+			String str = "";
+			str += allArg[index].substring(1) + " ";
+			int i = index + 1;
+			while (!allArg[i].endsWith("\"")) {
+				str += allArg[i] + " ";
+				i++;
+			}
 			
-		}else if (arg.startsWith("{") && arg.startsWith("}")) {
+			str += allArg[i].substring(0, allArg[i].length() - 1);
+			return new ParseArgReturn<String>(i, str);
+			
+		}else if (arg.startsWith("{") && arg.endsWith("}")) {
 //			JPSwingVariable
 			
 			String eVarName = arg.substring(1, arg.length() - 1); //crop off { and }
 			JPSwingVariable eVar = JPSwing.instance.getRuntime().getVariableByName(eVarName);
-			return new ParseArgReturn<>(index, eVar);
+			return new ParseArgReturn<Object>(index, eVar.getValue());
 			
 		}else {
 //			number or boolean
@@ -43,7 +67,7 @@ public class JPSwingParseArg {
 //				is a double and not an int
 				try {
 					double earg = Double.parseDouble(arg);
-					return new ParseArgReturn<>(index, earg);
+					return new ParseArgReturn<Double>(index, earg);
 				}catch (NumberFormatException e) {
 //					this is NOT expected
 					e.printStackTrace();
@@ -54,16 +78,16 @@ public class JPSwingParseArg {
 //			try an int
 			try {
 				int earg = Integer.parseInt(arg);
-				return new ParseArgReturn<>(index, earg);
+				return new ParseArgReturn<Integer>(index, earg);
 			}catch (NumberFormatException e) {
 //				this is expected
 			}
 			
 //			try a boolean
 			if (arg.equalsIgnoreCase("true")) {
-				return new ParseArgReturn<>(index, true);
+				return new ParseArgReturn<Boolean>(index, true);
 			}else if (arg.equalsIgnoreCase("false")) {
-				return new ParseArgReturn<>(index, false);
+				return new ParseArgReturn<Boolean>(index, false);
 			}
 			
 //			nothing else to try, must be an error

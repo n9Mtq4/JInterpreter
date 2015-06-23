@@ -3,10 +3,10 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
+import com.n9mtq4.console.lib.utils.ReflectionHelper;
 import com.n9mtq4.jpswing.JPSwing;
 import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
 import com.n9mtq4.jpswing.runtime.JPSwingVariable;
-import com.n9mtq4.jpswing.utils.ReflectionHelper;
 
 /**
  * Created by will on 6/15/15 at 9:42 PM.
@@ -31,8 +31,9 @@ public class MethodExecutor extends ConsoleListener {
 		
 		Object[] args = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
-//		TODO: two way communication. Send response back to python
+//		TODO: two way communication. Send response back to python. I'll let an outgoing gui handle it
 		Object response = ReflectionHelper.callObjectMethod(methodName, var.getValue(), var.getValueType(), args);
+		if (response != null) baseConsole.pushObject(response, "result method " + methodName);
 		
 	}
 	

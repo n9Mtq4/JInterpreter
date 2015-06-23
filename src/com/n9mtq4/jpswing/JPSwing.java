@@ -2,7 +2,8 @@ package com.n9mtq4.jpswing;
 
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.gui.GuiScanner;
-import com.n9mtq4.jpswing.listener.JPSwingMainListener;
+import com.n9mtq4.jpswing.listener.MethodExecutor;
+import com.n9mtq4.jpswing.listener.VariableCreator;
 import com.n9mtq4.jpswing.runtime.JPSwingRuntime;
 
 /**
@@ -32,7 +33,8 @@ public class JPSwing {
 //		server.addGui(new SocketHandler());
 		server.addGui(new GuiScanner());
 		
-		server.addListener(new JPSwingMainListener());
+		server.addListener(new MethodExecutor());
+		server.addListener(new VariableCreator());
 		
 	}
 	

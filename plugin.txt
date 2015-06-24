@@ -1,2 +1,1 @@
-com.n9mtq4.jpswing.listener.MethodExecutor
-com.n9mtq4.jpswing.listener.VariableCreator
+com.n9mtq4.jpswing.listener.JPSwingListener

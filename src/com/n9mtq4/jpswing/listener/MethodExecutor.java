@@ -8,6 +8,9 @@ import com.n9mtq4.jpswing.JPSwing;
 import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
 import com.n9mtq4.jpswing.runtime.JPSwingVariable;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 /**
  * Created by will on 6/15/15 at 9:42 PM.
  */
@@ -33,6 +36,14 @@ public class MethodExecutor extends ConsoleListener {
 		
 //		TODO: two way communication. Send response back to python. I'll let an outgoing gui handle it
 		Object response = ReflectionHelper.callObjectMethod(methodName, var.getValue(), var.getValueType(), args);
+		
+		try {
+			Method m = ReflectionHelper.getAllDeclaredMethod(methodName, ReflectionHelper.getClassParams(args), var.getValueType());
+			baseConsole.println("invoked method " + varName + "." + m.getName() + " with params " + Arrays.toString(m.getParameterTypes()));
+		}catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		
 		if (response != null) baseConsole.pushObject(response, "result method " + methodName);
 		
 	}

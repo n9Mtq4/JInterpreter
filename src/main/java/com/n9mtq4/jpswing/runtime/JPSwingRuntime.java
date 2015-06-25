@@ -11,7 +11,7 @@ public class JPSwingRuntime {
 	
 	public JPSwingRuntime() {
 		
-		this.variables = new ArrayList<>();
+		this.variables = new ArrayList<JPSwingVariable>();
 		
 	}
 	

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class JPSwingParseArg {
 	
 	public static Object[] parseArgs(int startIndex, String[] allArg, String allArgs) {
-		ArrayList<Object> objects = new ArrayList<>();
+		ArrayList<Object> objects = new ArrayList<Object>();
 		for (int i = startIndex; i < allArg.length; i++) {
 			try {
 				ParseArgReturn result = parseArg(allArg[i], i, allArg, allArgs);

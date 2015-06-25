@@ -30,7 +30,7 @@ public class VariableCreator extends ConsoleListener {
 		Object[] sArgs = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
 		Object varValue = ReflectionHelper.callConstructor(ReflectionHelper.getClass(varClass), sArgs);
-		JPSwingVariable<Object> variable = new JPSwingVariable<>(varName, varValue);
+		JPSwingVariable<Object> variable = new JPSwingVariable<Object>(varName, varValue);
 		
 		JPSwing.instance.getRuntime().addVariable(variable);
 		

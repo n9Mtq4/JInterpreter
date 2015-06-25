@@ -1,0 +1,22 @@
+group 'JInterpreter'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('../LogWindowApi/build/libs/LogWindowApi-4.jar')
+}
+
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    if (!state.failure && task.name.equalsIgnoreCase('build')) {
+        copy {
+            from('build/libs/JInterpreter.jar')
+            into('environment/plugins/')
+        }
+    }
+}

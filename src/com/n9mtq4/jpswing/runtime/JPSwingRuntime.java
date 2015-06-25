@@ -23,6 +23,10 @@ public class JPSwingRuntime {
 		
 	}
 	
+	public void removeVariable(JPSwingVariable variable) {
+		variables.remove(variable);
+	}
+	
 	public JPSwingVariable getVariableByName(String name) {
 		
 		for (JPSwingVariable variable : variables) {

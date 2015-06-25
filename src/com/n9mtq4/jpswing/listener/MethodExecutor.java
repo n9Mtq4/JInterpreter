@@ -26,6 +26,7 @@ public class MethodExecutor extends ConsoleListener {
 	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
 		
 		if (!consoleActionEvent.getCommand().getArg(0).equals("invoke")) return;
+		if (consoleActionEvent.getCommand().getLength() < 3) return;
 		
 		String varName = consoleActionEvent.getCommand().getArg(1);
 		JPSwingVariable var = JPSwing.instance.getRuntime().getVariableByName(varName);
@@ -34,17 +35,18 @@ public class MethodExecutor extends ConsoleListener {
 		
 		Object[] args = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
-//		TODO: two way communication. Send response back to python. I'll let an outgoing gui handle it
-		Object response = ReflectionHelper.callObjectMethod(methodName, var.getValue(), var.getValueType(), args);
-		
 		try {
+			
 			Method m = ReflectionHelper.getAllDeclaredMethod(methodName, ReflectionHelper.getClassParams(args), var.getValueType());
-			baseConsole.println("invoked method " + varName + "." + m.getName() + " with params " + Arrays.toString(m.getParameterTypes()));
+			Object result = ReflectionHelper.callObjectMethod(m, var.getValue(), args);
+			
+			baseConsole.println("invoked method " + var.getName() + "." + m.getName() + " with params " + Arrays.toString(m.getParameterTypes()));
+			
+			if (result != null) baseConsole.pushObject(result, "result method " + var.getName() + methodName);
+			
 		}catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
-		
-		if (response != null) baseConsole.pushObject(response, "result method " + methodName);
 		
 	}
 	

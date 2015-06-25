@@ -14,6 +14,7 @@ import com.n9mtq4.jpswing.runtime.JPSwingVariable;
 public class VariableCreator extends ConsoleListener {
 	
 	/**
+	 * 0 = set
 	 * 1 = variable name<br>
 	 * 2 = class name<br>
 	 * 3... = arguments<br>
@@ -21,14 +22,14 @@ public class VariableCreator extends ConsoleListener {
 	@Override
 	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equals("create")) return;
+		if (!consoleActionEvent.getCommand().getArg(0).equals("set")) return;
 		
 		String varName = consoleActionEvent.getCommand().getArg(1);
 		String varClass = consoleActionEvent.getCommand().getArg(2);
 		
 		Object[] sArgs = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
-		Object varValue = ReflectionHelper.callConstructor(ReflectionHelper.getClassByFullName(varClass), sArgs);
+		Object varValue = ReflectionHelper.callConstructor(ReflectionHelper.getClass(varClass), sArgs);
 		JPSwingVariable<Object> variable = new JPSwingVariable<>(varName, varValue);
 		
 		JPSwing.instance.getRuntime().addVariable(variable);

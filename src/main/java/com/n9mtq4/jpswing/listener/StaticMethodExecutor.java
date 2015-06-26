@@ -43,15 +43,7 @@ public class StaticMethodExecutor extends ConsoleListener {
 			
 			if (result != null) {
 				baseConsole.pushObject(result, "result method " + clazz.getName() + " " + methodName);
-				
-				JPSwingVariable<Object> resultVar = JPSwing.instance.getRuntime().getVariableByName("result"); //TODO: intellij warning
-				if (resultVar != null) {
-					resultVar.setValue(result);
-				}else {
-					resultVar = new JPSwingVariable<Object>("result", result);
-					JPSwing.instance.getRuntime().addVariable(resultVar);
-				}
-				
+				JPSwing.instance.getRuntime().updateResult(result);
 			}
 			
 		}catch (NoSuchMethodException e) {

@@ -37,6 +37,18 @@ public class JPSwingRuntime {
 		
 	}
 	
+	public void updateResult(Object result) {
+		
+		JPSwingVariable<Object> resultVar = getVariableByName("result"); //TODO: intellij warning
+		if (resultVar != null) {
+			resultVar.setValue(result);
+		}else {
+			resultVar = new JPSwingVariable<Object>("result", result);
+			addVariable(resultVar);
+		}
+		
+	}
+	
 	public ArrayList<JPSwingVariable> getVariables() {
 		return variables;
 	}

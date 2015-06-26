@@ -88,6 +88,11 @@ public class JPSwingParseArg {
 				return new ParseArgReturn<Boolean>(index, false);
 			}
 			
+//			try null
+			if (arg.equalsIgnoreCase("null")) {
+				return new ParseArgReturn<Object>(index, null);
+			}
+			
 //			nothing else to try, must be an error
 //			the code will continue and pop out of the if statement
 //			and go on to throw an Exception

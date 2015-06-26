@@ -7,3 +7,7 @@ com.n9mtq4.jpswing.listener.VariableRemover
 com.n9mtq4.jpswing.listener.VariableValue
 com.n9mtq4.jpswing.listener.VariableDuplicator
 com.n9mtq4.jpswing.listener.ListVariables
+com.n9mtq4.jpswing.listener.GetStaticField
+com.n9mtq4.jpswing.listener.SetStaticField
+com.n9mtq4.jpswing.listener.GetField
+com.n9mtq4.jpswing.listener.SetField

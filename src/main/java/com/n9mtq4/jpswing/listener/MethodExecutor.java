@@ -42,7 +42,17 @@ public class MethodExecutor extends ConsoleListener {
 			
 			baseConsole.println("invoked method " + var.getName() + "." + m.getName() + " with params " + Arrays.toString(m.getParameterTypes()));
 			
-			if (result != null) baseConsole.pushObject(result, "result method " + var.getName() + methodName);
+			if (result != null) {
+				baseConsole.pushObject(result, "result method " + var.getName() + methodName);
+				
+				JPSwingVariable<Object> resultVar = JPSwing.instance.getRuntime().getVariableByName("result"); //TODO: intellij warning
+				if (resultVar != null) {
+					resultVar.setValue(result);
+				}else {
+					resultVar = new JPSwingVariable<Object>("result", result);
+					JPSwing.instance.getRuntime().addVariable(resultVar);
+				}
+			}
 			
 		}catch (NoSuchMethodException e) {
 			e.printStackTrace();

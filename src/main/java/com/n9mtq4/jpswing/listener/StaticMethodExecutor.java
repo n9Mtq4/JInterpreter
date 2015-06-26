@@ -4,7 +4,9 @@ import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.console.lib.utils.ReflectionHelper;
+import com.n9mtq4.jpswing.JPSwing;
 import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
+import com.n9mtq4.jpswing.runtime.JPSwingVariable;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -39,7 +41,18 @@ public class StaticMethodExecutor extends ConsoleListener {
 			
 			baseConsole.println("invoked method " + className + "." + method.getName() + " with params " + Arrays.toString(method.getParameterTypes()));
 			
-			if (result != null) baseConsole.pushObject(result, "result method " + clazz.getName() + " " + methodName);
+			if (result != null) {
+				baseConsole.pushObject(result, "result method " + clazz.getName() + " " + methodName);
+				
+				JPSwingVariable<Object> resultVar = JPSwing.instance.getRuntime().getVariableByName("result"); //TODO: intellij warning
+				if (resultVar != null) {
+					resultVar.setValue(result);
+				}else {
+					resultVar = new JPSwingVariable<Object>("result", result);
+					JPSwing.instance.getRuntime().addVariable(resultVar);
+				}
+				
+			}
 			
 		}catch (NoSuchMethodException e) {
 			e.printStackTrace();

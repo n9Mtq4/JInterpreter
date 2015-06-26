@@ -23,6 +23,9 @@ public class VariableCreator extends ConsoleListener {
 	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
 		
 		if (!consoleActionEvent.getCommand().getArg(0).equals("set")) return;
+		if (consoleActionEvent.getCommand().getLength() < 3) return;
+//		support for VariableDuplicator
+		if (consoleActionEvent.getCommand().getArg(2).startsWith("{") && consoleActionEvent.getCommand().getArg(2).endsWith("}")) return;
 		
 		String varName = consoleActionEvent.getCommand().getArg(1);
 		String varClass = consoleActionEvent.getCommand().getArg(2);

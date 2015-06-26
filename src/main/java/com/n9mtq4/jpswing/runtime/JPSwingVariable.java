@@ -29,6 +29,7 @@ public class JPSwingVariable<E> {
 	
 	public void setValue(E value) {
 		this.value = value;
+		this.valueType = value.getClass();
 	}
 	
 	public Class getValueType() {

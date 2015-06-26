@@ -5,3 +5,5 @@ com.n9mtq4.jpswing.listener.StaticMethodExecutor
 com.n9mtq4.jpswing.listener.VariableCreator
 com.n9mtq4.jpswing.listener.VariableRemover
 com.n9mtq4.jpswing.listener.VariableValue
+com.n9mtq4.jpswing.listener.VariableDuplicator
+com.n9mtq4.jpswing.listener.ListVariables

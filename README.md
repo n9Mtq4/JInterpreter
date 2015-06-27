@@ -21,6 +21,7 @@ In the following examples, args... represents passing arguments. The options for
  - A Boolean, true or false ex: false
  - A String, text surrounded by quotes ex: "Hello World"
  - Another variable, variable name surrounded with { and } ex: {frm}
+ - null (note: only works with setfields and invoking. not constructors)
 
 ###Setting a variable
 ```
@@ -84,4 +85,48 @@ this is equivalent to
 ```java
 classname.method(args...);
 System.getProperty("os.name");
+```
+
+###Setting a field
+```
+setfield varname fieldname newvalue
+```
+this is equivalent to
+```java
+varname.fieldname = newvalue;
+```
+
+###Getting a field
+```
+getfield varname fieldname
+```
+this is equivalent to
+```java
+System.out.println(varname.fieldname.toString());
+```
+
+###Setting a static field
+```
+setstaticfield classname fieldname newvalue
+//example
+setstaticfield com.n9mtq4.jpswing.JPSwing instance null
+```
+this is equivalent to
+```java
+classname.fieldname = newvalue;
+//example
+com.n9mtq4.jpswing.JPSwing.instance = null
+```
+
+###Getting a static field
+```
+getstaticfield classname fieldname
+//example
+getstaticfield java.lang.System out
+```
+this is equivalent to
+```java
+System.out.println(classname.fieldname.toString());
+//example
+System.out.println(java.lang.System.out.toString());
 ```

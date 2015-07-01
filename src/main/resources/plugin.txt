@@ -11,3 +11,4 @@ com.n9mtq4.jpswing.listener.GetStaticField
 com.n9mtq4.jpswing.listener.SetStaticField
 com.n9mtq4.jpswing.listener.GetField
 com.n9mtq4.jpswing.listener.SetField
+com.n9mtq4.jpswing.listener.FileScriptLoader

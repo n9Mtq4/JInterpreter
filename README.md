@@ -26,7 +26,7 @@ In the following examples, args... represents passing arguments. The options for
 ###Setting a variable
 ```
 set varname classname args...
-//example
+#example
 set frm javax.swing.JFrame "Hello World"
 ```
 this is equivalent to 
@@ -39,7 +39,7 @@ JFrame frm = new JFrame("Hello World");
 ###Getting a variable
 ```
 get varname
-//example
+#example
 get frm
 ```
 this is equvalant to
@@ -54,7 +54,7 @@ System.out.println(frm.toString());
 ###Removing a variable
 ```
 unset varname
-//example
+#example
 unset frm
 ```
 this is equivalent to
@@ -65,7 +65,7 @@ this is equivalent to
 ###Calling a method
 ```
 invoke varname methodname args...
-//example
+#example
 invoke frm setVisible true
 ```
 this is equvalant to
@@ -78,7 +78,7 @@ frm.setVisible(true);
 ###Calling a static method
 ```
 invokestatic classname method args...
-//example
+#example
 invokestatic java.lang.System getProperty "os.name"
 ```
 this is equivalent to
@@ -108,7 +108,7 @@ System.out.println(varname.fieldname.toString());
 ###Setting a static field
 ```
 setstaticfield classname fieldname newvalue
-//example
+#example
 setstaticfield com.n9mtq4.jpswing.JPSwing instance null
 ```
 this is equivalent to
@@ -121,7 +121,7 @@ com.n9mtq4.jpswing.JPSwing.instance = null
 ###Getting a static field
 ```
 getstaticfield classname fieldname
-//example
+#example
 getstaticfield java.lang.System out
 ```
 this is equivalent to

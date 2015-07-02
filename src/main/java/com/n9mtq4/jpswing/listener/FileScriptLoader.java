@@ -14,7 +14,7 @@ public class FileScriptLoader extends ConsoleListener {
 	private static final String commandName = "runfile";
 	
 	/**
-	 * 0 = load
+	 * 0 = runfile
 	 * 1 = file path (file path CAN have spaces)
 	 * */
 	@Override
@@ -40,12 +40,15 @@ public class FileScriptLoader extends ConsoleListener {
 			String line;
 			while ((line = br.readLine()) != null) {
 				
-//				send it to one BaseConsole only
-				consoleActionEvent.getInitiatingBaseConsole().push(line);
+//				check for comments
+				if (!line.startsWith("#")) {
+//					send it to one BaseConsole only
+					consoleActionEvent.getInitiatingBaseConsole().push(line);
+				}
 				
 			}
 			
-			br.close();
+			fis.close();
 			
 		}catch (FileNotFoundException e) {
 			baseConsole.println("There was an error reading the file!");

@@ -1,0 +1,5 @@
+set frm javax.swing.JFrame "A Window"
+set lbl javax.swing.JLabel "Hello! I am a JLabel"
+invoke frm add {lbl}
+invoke frm pack
+invoke frm setVisible true

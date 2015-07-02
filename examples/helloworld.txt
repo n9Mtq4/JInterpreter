@@ -1,0 +1,3 @@
+getstaticfield java.lang.System out
+set out {result}
+invoke out println "Hello World"

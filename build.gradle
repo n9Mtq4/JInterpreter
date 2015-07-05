@@ -18,5 +18,9 @@ gradle.taskGraph.afterTask { Task task, TaskState state ->
             from('build/libs/JInterpreter.jar')
             into('environment/plugins/')
         }
+        copy {
+            from('examples/')
+            into('environment/examples/')
+        }
     }
 }

@@ -1,4 +1,5 @@
 com.n9mtq4.console.lib.modules.ModuleExit
+com.n9mtq4.jpswing.reflection.ReflectionLoader
 com.n9mtq4.jpswing.listener.JPSwingListener
 com.n9mtq4.jpswing.listener.MethodExecutor
 com.n9mtq4.jpswing.listener.StaticMethodExecutor
@@ -12,3 +13,7 @@ com.n9mtq4.jpswing.listener.SetStaticField
 com.n9mtq4.jpswing.listener.GetField
 com.n9mtq4.jpswing.listener.SetField
 com.n9mtq4.jpswing.listener.FileScriptLoader
+com.n9mtq4.jpswing.listener.GetMethodsClass
+com.n9mtq4.jpswing.listener.GetMethodsVariable
+com.n9mtq4.jpswing.listener.GetFieldsClass
+com.n9mtq4.jpswing.listener.GetFieldsVariable

@@ -3,10 +3,10 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.console.lib.utils.ReflectionHelper;
 import com.n9mtq4.jpswing.JPSwing;
 import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
 import com.n9mtq4.jpswing.runtime.JPSwingVariable;
+import com.n9mtq4.reflection.ReflectionHelper;
 
 /**
  * Created by will on 6/15/15 at 8:54 PM.

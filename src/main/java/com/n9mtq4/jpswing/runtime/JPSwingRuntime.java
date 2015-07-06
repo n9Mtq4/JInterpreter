@@ -39,6 +39,7 @@ public class JPSwingRuntime {
 	
 	public void updateResult(Object result) {
 		
+		@SuppressWarnings("unchecked")
 		JPSwingVariable<Object> resultVar = getVariableByName("result"); //TODO: intellij warning
 		if (resultVar != null) {
 			resultVar.setValue(result);

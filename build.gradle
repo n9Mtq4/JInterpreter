@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     compile files('../LogWindowApi/build/libs/LogWindowApi-4.jar')
+    compile files('JInterpreter/ReflectionHelper.jar')
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->

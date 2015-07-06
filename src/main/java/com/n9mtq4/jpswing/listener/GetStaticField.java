@@ -3,7 +3,7 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
+import com.n9mtq4.jpswing.JInterpreter;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Field;
@@ -35,7 +35,7 @@ public class GetStaticField extends ConsoleListener {
 			
 			if (result != null) {
 				baseConsole.pushObject(result, "field " + className + " " + fieldName);
-				JPSwing.instance.getRuntime().updateResult(result);
+				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			
 		}catch (NoSuchFieldException e) {

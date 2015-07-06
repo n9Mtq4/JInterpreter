@@ -1,30 +1,30 @@
 package com.n9mtq4.jpswing;
 
 import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.jpswing.runtime.JPSwingRuntime;
+import com.n9mtq4.jpswing.runtime.JIntRuntime;
 
 /**
  * Created by will on 6/14/15 at 8:44 PM.
  */
-public class JPSwing {
+public class JInterpreter {
 	
 	public static final int PORT = 45454;
 	
-	public static JPSwing instance;
+	public static JInterpreter instance;
 	
 	public static void main(String[] args) {
 		
 		if (instance != null) return;
-		instance = new JPSwing();
+		instance = new JInterpreter();
 		
 	}
 	
 	private BaseConsole server;
-	private JPSwingRuntime runtime;
+	private JIntRuntime runtime;
 	
-	public JPSwing() {
+	public JInterpreter() {
 		
-		this.runtime = new JPSwingRuntime();
+		this.runtime = new JIntRuntime();
 		
 	}
 	
@@ -32,7 +32,7 @@ public class JPSwing {
 		return server;
 	}
 	
-	public JPSwingRuntime getRuntime() {
+	public JIntRuntime getRuntime() {
 		return runtime;
 	}
 	

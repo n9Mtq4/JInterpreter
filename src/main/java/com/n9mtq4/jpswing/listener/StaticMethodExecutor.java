@@ -3,8 +3,8 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
-import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
+import com.n9mtq4.jpswing.JInterpreter;
+import com.n9mtq4.jpswing.runtime.JIntParseArg;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Method;
@@ -29,7 +29,7 @@ public class StaticMethodExecutor extends ConsoleListener {
 		
 		String className = consoleActionEvent.getCommand().getArg(1);
 		String methodName = consoleActionEvent.getCommand().getArg(2);
-		Object[] args = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
+		Object[] args = JIntParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
 		Class clazz = ReflectionHelper.getClass(className);
 		
@@ -42,7 +42,7 @@ public class StaticMethodExecutor extends ConsoleListener {
 			
 			if (result != null) {
 				baseConsole.pushObject(result, "result method " + clazz.getName() + " " + methodName);
-				JPSwing.instance.getRuntime().updateResult(result);
+				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			
 		}catch (NoSuchMethodException e) {

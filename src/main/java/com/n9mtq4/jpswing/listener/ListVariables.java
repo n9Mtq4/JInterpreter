@@ -3,8 +3,8 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
-import com.n9mtq4.jpswing.runtime.JPSwingVariable;
+import com.n9mtq4.jpswing.JInterpreter;
+import com.n9mtq4.jpswing.runtime.JIntVariable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class ListVariables extends ConsoleListener {
 		
 		if (!consoleActionEvent.getCommand().eqt("listvars")) return;
 		
-		ArrayList<JPSwingVariable> vars = JPSwing.instance.getRuntime().getVariables();
+		ArrayList<JIntVariable> vars = JInterpreter.instance.getRuntime().getVariables();
 		String[] varNames = new String[vars.size()];
 		
 		for (int i = 0; i < vars.size(); i++) {

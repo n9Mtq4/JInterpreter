@@ -3,9 +3,9 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
-import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
-import com.n9mtq4.jpswing.runtime.JPSwingVariable;
+import com.n9mtq4.jpswing.JInterpreter;
+import com.n9mtq4.jpswing.runtime.JIntParseArg;
+import com.n9mtq4.jpswing.runtime.JIntVariable;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Method;
@@ -29,11 +29,11 @@ public class MethodExecutor extends ConsoleListener {
 		if (consoleActionEvent.getCommand().getLength() < 3) return;
 		
 		String varName = consoleActionEvent.getCommand().getArg(1);
-		JPSwingVariable var = JPSwing.instance.getRuntime().getVariableByName(varName);
+		JIntVariable var = JInterpreter.instance.getRuntime().getVariableByName(varName);
 		
 		String methodName = consoleActionEvent.getCommand().getArg(2);
 		
-		Object[] args = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
+		Object[] args = JIntParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
 		try {
 			
@@ -44,7 +44,7 @@ public class MethodExecutor extends ConsoleListener {
 			
 			if (result != null) {
 				baseConsole.pushObject(result, "result method " + var.getName() + methodName);
-				JPSwing.instance.getRuntime().updateResult(result);
+				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			
 		}catch (NoSuchMethodException e) {

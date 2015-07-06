@@ -3,13 +3,13 @@ package com.n9mtq4.jpswing.runtime;
 /**
  * Created by will on 6/15/15 at 8:55 PM.
  */
-public class JPSwingVariable<E> {
+public class JIntVariable<E> {
 	
 	private String name;
 	private E value;
 	private Class valueType;
 	
-	public JPSwingVariable(String name, E value) {
+	public JIntVariable(String name, E value) {
 		this.name = name;
 		this.value = value;
 		this.valueType = value.getClass();

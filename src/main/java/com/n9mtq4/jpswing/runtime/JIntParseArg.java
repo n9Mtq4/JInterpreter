@@ -1,13 +1,13 @@
 package com.n9mtq4.jpswing.runtime;
 
-import com.n9mtq4.jpswing.JPSwing;
+import com.n9mtq4.jpswing.JInterpreter;
 
 import java.util.ArrayList;
 
 /**
  * Created by will on 6/15/15 at 9:51 PM.
  */
-public class JPSwingParseArg {
+public class JIntParseArg {
 	
 	public static Object[] parseArgs(int startIndex, String[] allArg, String allArgs) {
 		ArrayList<Object> objects = new ArrayList<Object>();
@@ -54,7 +54,7 @@ public class JPSwingParseArg {
 //			JPSwingVariable
 			
 			String eVarName = arg.substring(1, arg.length() - 1); //crop off { and }
-			JPSwingVariable eVar = JPSwing.instance.getRuntime().getVariableByName(eVarName);
+			JIntVariable eVar = JInterpreter.instance.getRuntime().getVariableByName(eVarName);
 			return new ParseArgReturn<Object>(index, eVar.getValue());
 			
 		}else {

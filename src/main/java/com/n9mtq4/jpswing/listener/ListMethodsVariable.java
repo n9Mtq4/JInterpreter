@@ -3,7 +3,7 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
+import com.n9mtq4.jpswing.JInterpreter;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Method;
@@ -27,7 +27,7 @@ public class ListMethodsVariable extends ConsoleListener {
 		
 		try {
 			
-			Class clazz = JPSwing.instance.getRuntime().getVariableByName(consoleActionEvent.getCommand().getArg(1)).getValueType();
+			Class clazz = JInterpreter.instance.getRuntime().getVariableByName(consoleActionEvent.getCommand().getArg(1)).getValueType();
 			Method[] methods = ReflectionHelper.getAllDeclaredMethods(clazz);
 			
 			baseConsole.println(Arrays.toString(methods));

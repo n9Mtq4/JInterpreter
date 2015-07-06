@@ -5,17 +5,17 @@ import java.util.ArrayList;
 /**
  * Created by will on 6/15/15 at 8:55 PM.
  */
-public class JPSwingRuntime {
+public class JIntRuntime {
 	
-	private ArrayList<JPSwingVariable> variables;
+	private ArrayList<JIntVariable> variables;
 	
-	public JPSwingRuntime() {
+	public JIntRuntime() {
 		
-		this.variables = new ArrayList<JPSwingVariable>();
+		this.variables = new ArrayList<JIntVariable>();
 		
 	}
 	
-	public void addVariable(JPSwingVariable variable) {
+	public void addVariable(JIntVariable variable) {
 		
 		if (getVariableByName(variable.getName()) != null) throw new IllegalArgumentException("Variables can't have the same name");
 		
@@ -23,13 +23,13 @@ public class JPSwingRuntime {
 		
 	}
 	
-	public void removeVariable(JPSwingVariable variable) {
+	public void removeVariable(JIntVariable variable) {
 		variables.remove(variable);
 	}
 	
-	public JPSwingVariable getVariableByName(String name) {
+	public JIntVariable getVariableByName(String name) {
 		
-		for (JPSwingVariable variable : variables) {
+		for (JIntVariable variable : variables) {
 			if (variable.getName().equals(name)) return variable;
 		}
 		
@@ -40,17 +40,17 @@ public class JPSwingRuntime {
 	public void updateResult(Object result) {
 		
 		@SuppressWarnings("unchecked")
-		JPSwingVariable<Object> resultVar = getVariableByName("result"); //TODO: intellij warning
+		JIntVariable<Object> resultVar = getVariableByName("result"); //TODO: intellij warning
 		if (resultVar != null) {
 			resultVar.setValue(result);
 		}else {
-			resultVar = new JPSwingVariable<Object>("result", result);
+			resultVar = new JIntVariable<Object>("result", result);
 			addVariable(resultVar);
 		}
 		
 	}
 	
-	public ArrayList<JPSwingVariable> getVariables() {
+	public ArrayList<JIntVariable> getVariables() {
 		return variables;
 	}
 	

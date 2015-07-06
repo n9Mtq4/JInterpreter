@@ -3,9 +3,9 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
-import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
-import com.n9mtq4.jpswing.runtime.JPSwingVariable;
+import com.n9mtq4.jpswing.JInterpreter;
+import com.n9mtq4.jpswing.runtime.JIntParseArg;
+import com.n9mtq4.jpswing.runtime.JIntVariable;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 /**
@@ -30,12 +30,12 @@ public class VariableCreator extends ConsoleListener {
 		String varName = consoleActionEvent.getCommand().getArg(1);
 		String varClass = consoleActionEvent.getCommand().getArg(2);
 		
-		Object[] sArgs = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
+		Object[] sArgs = JIntParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
 		Object varValue = ReflectionHelper.callConstructor(ReflectionHelper.getClass(varClass), sArgs);
-		JPSwingVariable<Object> variable = new JPSwingVariable<Object>(varName, varValue);
+		JIntVariable<Object> variable = new JIntVariable<Object>(varName, varValue);
 		
-		JPSwing.instance.getRuntime().addVariable(variable);
+		JInterpreter.instance.getRuntime().addVariable(variable);
 		
 		baseConsole.println("Added variable " + variable.getName() + " of class " + variable.getValue().getClass().getName());
 		

@@ -3,9 +3,9 @@ package com.n9mtq4.jpswing.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.jpswing.JPSwing;
-import com.n9mtq4.jpswing.runtime.JPSwingParseArg;
-import com.n9mtq4.jpswing.runtime.JPSwingVariable;
+import com.n9mtq4.jpswing.JInterpreter;
+import com.n9mtq4.jpswing.runtime.JIntParseArg;
+import com.n9mtq4.jpswing.runtime.JIntVariable;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Field;
@@ -29,14 +29,14 @@ public class SetField extends ConsoleListener {
 		
 		String varName = consoleActionEvent.getCommand().getArg(1);
 		String fieldName = consoleActionEvent.getCommand().getArg(2);
-		Object[] args = JPSwingParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
+		Object[] args = JIntParseArg.parseArgs(3, consoleActionEvent.getCommand().getArgs(), consoleActionEvent.getCommand().getText());
 		
 		if (args.length != 1) {
 			baseConsole.println("You can't set a variable to multiple values!");
 			return;
 		}
 		
-		JPSwingVariable var = JPSwing.instance.getRuntime().getVariableByName(varName);
+		JIntVariable var = JInterpreter.instance.getRuntime().getVariableByName(varName);
 		if (var == null) {
 			baseConsole.println("Variable " + varName + " does not exist!");
 			return;

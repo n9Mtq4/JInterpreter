@@ -1,7 +1,7 @@
 package com.n9mtq4.jpswing.utils;
 
 import com.n9mtq4.console.lib.gui.GuiSocket;
-import com.n9mtq4.jpswing.JPSwing;
+import com.n9mtq4.jpswing.JInterpreter;
 
 /**
  * Created by will on 6/14/15 at 8:48 PM.
@@ -9,7 +9,7 @@ import com.n9mtq4.jpswing.JPSwing;
 public class SocketHandler extends GuiSocket {
 	
 	public SocketHandler() {
-		this.port = JPSwing.PORT;
+		this.port = JInterpreter.PORT;
 	}
 	
 	@Override

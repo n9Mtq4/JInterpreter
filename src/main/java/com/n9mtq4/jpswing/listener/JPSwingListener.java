@@ -5,7 +5,7 @@ import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.AdditionActionEvent;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.console.lib.events.SentObjectEvent;
-import com.n9mtq4.jpswing.JPSwing;
+import com.n9mtq4.jpswing.JInterpreter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class JPSwingListener extends ConsoleListener {
 	@Override
 	public void onAddition(AdditionActionEvent e) {
 		
-		JPSwing.main(new String[]{});
+		JInterpreter.main(new String[]{});
 		e.getBaseConsole().println("Successfully created a JInterpreter Runtime");
 		e.getBaseConsole().print("> ");
 		

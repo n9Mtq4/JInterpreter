@@ -13,7 +13,7 @@ com.n9mtq4.jpswing.listener.SetStaticField
 com.n9mtq4.jpswing.listener.GetField
 com.n9mtq4.jpswing.listener.SetField
 com.n9mtq4.jpswing.listener.FileScriptLoader
-com.n9mtq4.jpswing.listener.GetMethodsClass
-com.n9mtq4.jpswing.listener.GetMethodsVariable
-com.n9mtq4.jpswing.listener.GetFieldsClass
-com.n9mtq4.jpswing.listener.GetFieldsVariable
+com.n9mtq4.jpswing.listener.ListMethodsClass
+com.n9mtq4.jpswing.listener.ListMethodsVariable
+com.n9mtq4.jpswing.listener.ListFieldsClass
+com.n9mtq4.jpswing.listener.ListFieldsVariable

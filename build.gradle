@@ -9,22 +9,27 @@ repositories {
 }
 
 dependencies {
-    compile files('../LogWindowApi/build/libs/LogWindowApi-4.jar')
+    compile files('JInterpreter/LogWindowApi-4.jar')
     compile files('JInterpreter/ReflectionHelper.jar')
 }
 
 gradle.taskGraph.afterTask { Task task, TaskState state ->
+//    if the build succeeded
     if (!state.failure && task.name.equalsIgnoreCase('build')) {
+//        copy the jar into the distro directory
         copy {
             from('build/libs/JInterpreter.jar')
             into('JInterpreter/plugins/')
         }
+//        copy the examples into the distro directory
         copy {
             from('examples/')
             into('JInterpreter/examples/')
         }
+//        archive the distro directory
         exec {
             executable 'bash'
+            //noinspection GroovyAssignabilityCheck
             args '-c', 'rm JInterpreter.zip; zip JInterpreter.zip -r JInterpreter -x .* -Z deflate'
         }
     }

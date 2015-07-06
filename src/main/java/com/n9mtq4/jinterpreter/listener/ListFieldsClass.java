@@ -27,6 +27,8 @@ public class ListFieldsClass extends ConsoleListener {
 		try {
 			
 			Class clazz = ReflectionHelper.getClass(consoleActionEvent.getCommand().getArg(1));
+			if (clazz == null) return;
+			
 			Field[] fields = ReflectionHelper.getAllDeclaredFields(clazz);
 			
 			baseConsole.println(Arrays.toString(fields));

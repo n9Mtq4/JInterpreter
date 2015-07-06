@@ -27,6 +27,8 @@ public class ListMethodsClass extends ConsoleListener {
 		try {
 			
 			Class clazz = ReflectionHelper.getClass(consoleActionEvent.getCommand().getArg(1));
+			if (clazz == null) return;
+			
 			Method[] methods = ReflectionHelper.getAllDeclaredMethods(clazz);
 			
 			baseConsole.println(Arrays.toString(methods));

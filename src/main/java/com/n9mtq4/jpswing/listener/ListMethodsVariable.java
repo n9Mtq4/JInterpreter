@@ -15,13 +15,14 @@ import java.util.Arrays;
 public class ListMethodsVariable extends ConsoleListener {
 	
 	/**
-	 * 0 = getmethods
+	 * 0 = listmethods
 	 * 1 = variable name
 	 * */
+//	TODO: BAD - figure out a way to tell if class or variable, so it can print a failed message
 	@Override
 	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("getmethods")) return;
+		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("listmethods")) return;
 		if (consoleActionEvent.getCommand().getLength() != 2) return;
 		
 		try {

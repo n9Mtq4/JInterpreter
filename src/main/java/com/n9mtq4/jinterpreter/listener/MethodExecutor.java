@@ -43,7 +43,7 @@ public class MethodExecutor extends ConsoleListener {
 			baseConsole.println("invoked method " + var.getName() + "." + m.getName() + " with params " + Arrays.toString(m.getParameterTypes()));
 			
 			if (result != null) {
-				baseConsole.pushObject(result, "result method " + var.getName() + methodName);
+				baseConsole.pushObject(result, "result method " + var.getName() + "."+ methodName);
 				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			

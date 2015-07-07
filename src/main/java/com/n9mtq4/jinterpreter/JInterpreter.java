@@ -32,6 +32,10 @@ public class JInterpreter {
 		return server;
 	}
 	
+	public void setServer(BaseConsole server) {
+		this.server = server;
+	}
+	
 	public JIntRuntime getRuntime() {
 		return runtime;
 	}

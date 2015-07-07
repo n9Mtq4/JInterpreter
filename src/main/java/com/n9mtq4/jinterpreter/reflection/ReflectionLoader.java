@@ -16,7 +16,7 @@ public class ReflectionLoader extends ConsoleListener {
 	
 	private static final String reflectionHelperLocation = "ReflectionHelper.jar";
 	
-	public void onAddition(AdditionActionEvent e) {
+	public void onAddition(final AdditionActionEvent e) {
 		
 		try {
 			JarLoader.addFile(new File(reflectionHelperLocation));
@@ -27,10 +27,30 @@ public class ReflectionLoader extends ConsoleListener {
 			e.getBaseConsole().println("Error in adding ReflectionHelper to ClassPath");
 		}
 		
+//		This is a initializing listener, so disable it after its use
+		e.getBaseConsole().disableListener(this);
+		
+//		TODO: remove this listener or is just disabling it ok?
+//		You can't just remove it, because for some reason it gets re-added over and over
+/*		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(1000);
+				}catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				
+				e.getBaseConsole().removeListener(ReflectionLoader.this);
+				
+			}
+		}).start();*/
+		
 	}
 	
 	@Override
 	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+//		don't do anything
 	}
 	
 }

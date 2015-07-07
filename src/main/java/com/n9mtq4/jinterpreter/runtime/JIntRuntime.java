@@ -1,6 +1,8 @@
 package com.n9mtq4.jinterpreter.runtime;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * Created by will on 6/15/15 at 8:55 PM.
@@ -8,6 +10,21 @@ import java.util.ArrayList;
 public class JIntRuntime {
 	
 	private ArrayList<JIntVariable> variables;
+	
+	public static String getString(Object obj) {
+		
+		String value;
+		if (obj instanceof Object[]) {
+			value = Arrays.toString((Object[]) obj);
+		}else if (obj instanceof Collection) {
+			value = Arrays.toString(((Collection) obj).toArray());
+		}else {
+			value = obj.toString();
+		}
+		
+		return value;
+		
+	}
 	
 	public JIntRuntime() {
 		

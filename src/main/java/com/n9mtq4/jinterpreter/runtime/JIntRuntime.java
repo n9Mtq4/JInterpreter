@@ -1,6 +1,7 @@
 package com.n9mtq4.jinterpreter.runtime;
 
 import com.n9mtq4.console.lib.BaseConsole;
+import com.n9mtq4.jinterpreter.parser.JIntParser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.Collection;
 public class JIntRuntime {
 	
 	private ArrayList<JIntVariable> variables;
+	private JIntParser parser;
 	
 	public static String getString(Object obj) {
 		
@@ -75,6 +77,10 @@ public class JIntRuntime {
 	
 	public ArrayList<JIntVariable> getVariables() {
 		return variables;
+	}
+	
+	public JIntParser getParser() {
+		return parser;
 	}
 	
 }

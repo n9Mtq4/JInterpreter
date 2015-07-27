@@ -5,8 +5,8 @@ package com.n9mtq4.jinterpreter.parser;
  */
 public interface Clause<E> {
 	
-	public boolean correctClause(String thisClause, String[] otherClauses);
+	boolean correctClause(String thisClause, String[] otherClauses);
 	
-	public E evaluate(String thisClause, String[] otherClauses);
+	E evaluate(String thisClause, String[] otherClauses) throws ClauseParsingException;
 	
 }

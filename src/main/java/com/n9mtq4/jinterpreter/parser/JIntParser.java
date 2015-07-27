@@ -7,27 +7,41 @@ public class JIntParser {
 	
 	private ClauseManager clauseManager;
 	
-	public ClauseManager getClauseManager() {
-		return clauseManager;
+	public JIntParser() {
+		
+		this.clauseManager = new ClauseManager();
+		clauseManager.registerClauses();
+		
 	}
 	
-	public Object parseClause(String clause) {
+	public Object parseClause(String clause) throws ClauseParsingException {
 		
+		ClauseParsingException e = null;
 		for (Clause c : getClauseManager().clauses) {
 			
 //			TODO: deprecate otherClauses?
 			if (c.correctClause(clause, new String[]{})) {
 				
 //				TODO: deprecate otherClauses?
-				return c.evaluate(clause, new String[]{});
+				try {
+					
+					return c.evaluate(clause, new String[]{});
+					
+				}catch (ClauseParsingException e1) {
+					e = e1;
+				}
 				
 			}
 			
 		}
 		
-//		TODO: throw an error instead!
-		return null;
+		if (e != null) throw e;
+		throw new ClauseParsingException("A clause to parse the given input was not found!");
 		
+	}
+	
+	public ClauseManager getClauseManager() {
+		return clauseManager;
 	}
 	
 }

@@ -1,0 +1,5 @@
+com.n9mtq4.jinterpreter.parser.clauses.NewObject
+# Primitive Types
+com.n9mtq4.jinterpreter.parser.clauses.primitive.PrimitiveBoolean
+com.n9mtq4.jinterpreter.parser.clauses.primitive.PrimitiveDouble
+com.n9mtq4.jinterpreter.parser.clauses.primitive.PrimitiveInteger

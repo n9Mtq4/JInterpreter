@@ -33,6 +33,7 @@ public class JIntRuntime {
 	public JIntRuntime() {
 		
 		this.variables = new ArrayList<JIntVariable>();
+		this.parser = new JIntParser();
 		
 	}
 	

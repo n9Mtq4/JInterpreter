@@ -1,5 +1,7 @@
 package com.n9mtq4.jinterpreter.runtime;
 
+import com.n9mtq4.console.lib.BaseConsole;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,6 +32,10 @@ public class JIntRuntime {
 		
 		this.variables = new ArrayList<JIntVariable>();
 		
+	}
+	
+	public void output(Object o, BaseConsole console) {
+		console.pushObject(o, "output");
 	}
 	
 	public void addVariable(JIntVariable variable) {

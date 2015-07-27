@@ -68,7 +68,6 @@ public class JIntParseArg {
 					return new ParseArgReturn<Double>(index, earg);
 				}catch (NumberFormatException e) {
 //					this is NOT expected
-					e.printStackTrace();
 					throw e; //bubble for possibly more handling
 				}
 			}

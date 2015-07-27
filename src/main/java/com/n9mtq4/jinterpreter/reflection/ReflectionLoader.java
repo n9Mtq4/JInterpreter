@@ -16,7 +16,7 @@ public class ReflectionLoader extends ConsoleListener {
 	
 	private static final String reflectionHelperLocation = "ReflectionHelper.jar";
 	
-	public void onAddition(final AdditionActionEvent e) {
+	public void onAddition(/*final*/ AdditionActionEvent e) {
 		
 		try {
 			JarLoader.addFile(new File(reflectionHelperLocation));

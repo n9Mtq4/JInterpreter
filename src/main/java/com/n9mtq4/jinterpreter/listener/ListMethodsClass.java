@@ -3,6 +3,8 @@ package com.n9mtq4.jinterpreter.listener;
 import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.console.lib.ConsoleListener;
 import com.n9mtq4.console.lib.events.ConsoleActionEvent;
+import com.n9mtq4.jinterpreter.JInterpreter;
+import com.n9mtq4.jinterpreter.runtime.JIntRuntime;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Method;
@@ -31,7 +33,7 @@ public class ListMethodsClass extends ConsoleListener {
 			
 			Method[] methods = ReflectionHelper.getAllDeclaredMethods(clazz);
 			
-			baseConsole.println(Arrays.toString(methods));
+			JInterpreter.instance.getRuntime().output(methods, baseConsole);
 			
 		}catch (Exception e) {
 			

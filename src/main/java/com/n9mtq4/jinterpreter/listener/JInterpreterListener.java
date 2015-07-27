@@ -7,9 +7,7 @@ import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.console.lib.events.SentObjectEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.runtime.JIntRuntime;
-
-import java.util.Arrays;
-import java.util.Collection;
+import com.n9mtq4.jinterpreter.utils.SocketHandler;
 
 /**
  * Created by will on 6/23/15 at 8:51 PM.
@@ -25,6 +23,8 @@ public class JInterpreterListener extends ConsoleListener {
 		
 		JInterpreter.instance.setServer(e.getBaseConsole());
 		
+		if (JInterpreter.RUN_SERVER) e.getBaseConsole().addGui(new SocketHandler());
+		
 	}
 	
 	/**
@@ -35,6 +35,11 @@ public class JInterpreterListener extends ConsoleListener {
 	public void objectReceived(SentObjectEvent e, BaseConsole baseConsole) {
 		
 //		object.toString, but also handles arrays
+		
+		if (e.getMessage().equals("output")) {
+			baseConsole.println(JIntRuntime.getString(e.getObject()));
+		}
+		
 		String value = JIntRuntime.getString(e.getObject());
 		
 		baseConsole.println(e.getMessage() + " has value: " + value);

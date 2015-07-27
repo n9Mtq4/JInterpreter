@@ -8,6 +8,7 @@ import com.n9mtq4.jinterpreter.runtime.JIntRuntime;
  */
 public class JInterpreter {
 	
+	public static final boolean RUN_SERVER = false;
 	public static final int PORT = 45454;
 	
 	public static JInterpreter instance;
@@ -19,6 +20,7 @@ public class JInterpreter {
 		
 	}
 	
+	@Deprecated
 	private BaseConsole server;
 	private JIntRuntime runtime;
 	
@@ -28,10 +30,12 @@ public class JInterpreter {
 		
 	}
 	
+	@Deprecated
 	public BaseConsole getServer() {
 		return server;
 	}
 	
+	@Deprecated
 	public void setServer(BaseConsole server) {
 		this.server = server;
 	}

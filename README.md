@@ -1,6 +1,11 @@
 <b>JInterpreter</b>
 ===================
 
+#DISCONTINUED - As of JDK 1.9 this feature is built in to java. https://blogs.oracle.com/java/entry/jshell_and_relp_in_java
+
+
+-----------------------
+
 
 ##What is it?
 JInterpreter is a java library that allows for interpreting java without compiling it. Currently the syntax is different of that of java, however it does access java libraries.

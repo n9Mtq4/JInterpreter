@@ -1,10 +1,11 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.runtime.JIntVariable;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Field;
@@ -12,7 +13,7 @@ import java.lang.reflect.Field;
 /**
  * Created by will on 6/25/15 at 10:25 PM.
  */
-public class GetField extends ConsoleListener {
+public class GetField implements ObjectListener {
 	
 	/**
 	 * 0 = getfield
@@ -20,13 +21,16 @@ public class GetField extends ConsoleListener {
 	 * 2 = field
 	 * */
 	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("getfield")) return;
-		if (consoleActionEvent.getCommand().getLength() != 3) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
 		
-		String varName = consoleActionEvent.getCommand().getArg(1);
-		String fieldName = consoleActionEvent.getCommand().getArg(2);
+		if (!stringParser.getArg(0).equalsIgnoreCase("getfield")) return;
+		if (stringParser.getLength() != 3) return;
+		
+		String varName = stringParser.getArg(1);
+		String fieldName = stringParser.getArg(2);
 		
 		JIntVariable var = JInterpreter.instance.getRuntime().getVariableByName(varName);
 		if (var == null) {
@@ -40,13 +44,14 @@ public class GetField extends ConsoleListener {
 			Object result = ReflectionHelper.getObject(field, var.getValue());
 			
 			if (result != null) {
-				baseConsole.pushObject(result, "field " + varName + " " + fieldName);
+				baseConsole.push(result, "field " + varName + " " + fieldName);
 				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			
 		}catch (NoSuchFieldException e) {
 			baseConsole.println("The field " + varName + "." + fieldName + " does not exist!");
 		}
+		
 		
 	}
 	

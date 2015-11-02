@@ -1,7 +1,6 @@
-com.n9mtq4.console.lib.modules.ModuleExit
+com.n9mtq4.logwindow.modules.ModuleExit
 com.n9mtq4.jinterpreter.reflection.ReflectionLoader
 com.n9mtq4.jinterpreter.listener.JInterpreterListener
-# com.n9mtq4.jinterpreter.listener.PipeHandler
 com.n9mtq4.jinterpreter.listener.MethodExecutor
 com.n9mtq4.jinterpreter.listener.StaticMethodExecutor
 com.n9mtq4.jinterpreter.listener.VariableCreator

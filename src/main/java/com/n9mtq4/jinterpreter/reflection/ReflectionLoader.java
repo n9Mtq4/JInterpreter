@@ -1,10 +1,8 @@
 package com.n9mtq4.jinterpreter.reflection;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.AdditionActionEvent;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.console.lib.utils.JarLoader;
+import com.n9mtq4.logwindow.events.AdditionEvent;
+import com.n9mtq4.logwindow.listener.AdditionListener;
+import com.n9mtq4.logwindow.utils.JarLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,11 +10,11 @@ import java.io.IOException;
 /**
  * Created by will on 7/6/15 at 2:15 AM.
  */
-public class ReflectionLoader extends ConsoleListener {
+public class ReflectionLoader implements AdditionListener {
 	
 	private static final String reflectionHelperLocation = "ReflectionHelper.jar";
 	
-	public void onAddition(/*final*/ AdditionActionEvent e) {
+	public void onAddition(AdditionEvent e) {
 		
 		try {
 			JarLoader.addFile(new File(reflectionHelperLocation));
@@ -28,7 +26,7 @@ public class ReflectionLoader extends ConsoleListener {
 		}
 		
 //		This is a initializing listener, so disable it after its use
-		e.getBaseConsole().disableListener(this);
+		e.getBaseConsole().disableListenerAttribute(this);
 		
 //		TODO: remove this listener or is just disabling it ok?
 //		You can't just remove it, because for some reason it gets re-added over and over
@@ -46,11 +44,6 @@ public class ReflectionLoader extends ConsoleListener {
 			}
 		}).start();*/
 		
-	}
-	
-	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
-//		don't do anything
 	}
 	
 }

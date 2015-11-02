@@ -21,7 +21,7 @@ public class ClauseManager {
 	
 	public void registerClauses() {
 		
-		InputStream in = getClass().getResourceAsStream("clauses.txt");
+		InputStream in = getClass().getResourceAsStream("/clauses.txt");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		
 		try {

@@ -1,9 +1,10 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 import java.lang.reflect.Field;
@@ -11,7 +12,7 @@ import java.lang.reflect.Field;
 /**
  * Created by will on 6/25/15 at 9:27 PM.
  */
-public class GetStaticField extends ConsoleListener {
+public class GetStaticField implements ObjectListener {
 	
 	/**
 	 * 0 = getstaticfield
@@ -19,13 +20,16 @@ public class GetStaticField extends ConsoleListener {
 	 * 2 = field name
 	 * */
 	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("getstaticfield")) return;
-		if (consoleActionEvent.getCommand().getLength() != 3) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
 		
-		String className = consoleActionEvent.getCommand().getArg(1);
-		String fieldName = consoleActionEvent.getCommand().getArg(2);
+		if (!stringParser.getArg(0).equalsIgnoreCase("getstaticfield")) return;
+		if (stringParser.getLength() != 3) return;
+		
+		String className = stringParser.getArg(1);
+		String fieldName = stringParser.getArg(2);
 		
 		try {
 			
@@ -34,7 +38,7 @@ public class GetStaticField extends ConsoleListener {
 			Object result = ReflectionHelper.getStaticObject(field);
 			
 			if (result != null) {
-				baseConsole.pushObject(result, "field " + className + " " + fieldName);
+				baseConsole.push(result, "field " + className + " " + fieldName);
 				JInterpreter.instance.getRuntime().updateResult(result);
 			}
 			

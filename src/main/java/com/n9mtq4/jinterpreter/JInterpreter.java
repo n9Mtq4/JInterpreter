@@ -1,7 +1,7 @@
 package com.n9mtq4.jinterpreter;
 
-import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.jinterpreter.runtime.JIntRuntime;
+import com.n9mtq4.logwindow.BaseConsole;
 
 /**
  * Created by will on 6/14/15 at 8:44 PM.

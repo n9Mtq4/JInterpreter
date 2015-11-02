@@ -1,15 +1,21 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Created by will on 7/1/15 at 2:14 PM.
  */
-public class FileScriptLoader extends ConsoleListener {
+public class FileScriptLoader implements ObjectListener {
 	
 	private static final String commandName = "runfile";
 	
@@ -18,13 +24,16 @@ public class FileScriptLoader extends ConsoleListener {
 	 * 1 = file path (file path CAN have spaces)
 	 * */
 	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase(commandName)) return;
-		if (consoleActionEvent.getCommand().getLength() < 2) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
+		
+		if (!stringParser.getArg(0).equalsIgnoreCase(commandName)) return;
+		if (stringParser.getLength() < 2) return;
 		
 //		define the file
-		String filePath = consoleActionEvent.getCommand().getAfterPattern(commandName + " ").trim();
+		String filePath = stringParser.getAfterPattern(commandName + " ").trim();
 		File file = new File(filePath);
 		if (!file.exists()) {
 			baseConsole.println(filePath + " Does not exist!");
@@ -43,7 +52,7 @@ public class FileScriptLoader extends ConsoleListener {
 //				check for comments
 				if (!line.startsWith("#")) {
 //					send it to one BaseConsole only
-					consoleActionEvent.getInitiatingBaseConsole().push(line);
+					objectEvent.getInitiatingBaseConsole().pushString(line);
 				}
 				
 			}
@@ -59,6 +68,7 @@ public class FileScriptLoader extends ConsoleListener {
 			e.printStackTrace();
 			baseConsole.printStackTrace(e);
 		}
+		
 		
 	}
 	

@@ -1,21 +1,20 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.AdditionActionEvent;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
-import com.n9mtq4.console.lib.events.SentObjectEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.runtime.JIntRuntime;
-import com.n9mtq4.jinterpreter.utils.SocketHandler;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.AdditionEvent;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.AdditionListener;
+import com.n9mtq4.logwindow.listener.ObjectListener;
 
 /**
  * Created by will on 6/23/15 at 8:51 PM.
  */
-public class JInterpreterListener extends ConsoleListener {
+public class JInterpreterListener implements AdditionListener, ObjectListener {
 	
 	@Override
-	public void onAddition(AdditionActionEvent e) {
+	public void onAddition(AdditionEvent e) {
 		
 		JInterpreter.main(new String[]{});
 		e.getBaseConsole().println("Successfully created a JInterpreter Runtime");
@@ -23,7 +22,7 @@ public class JInterpreterListener extends ConsoleListener {
 		
 		JInterpreter.instance.setServer(e.getBaseConsole());
 		
-		if (JInterpreter.RUN_SERVER) e.getBaseConsole().addGui(new SocketHandler());
+//		if (JInterpreter.RUN_SERVER) e.getBaseConsole().addConsoleUi(new SocketHandler());
 		
 	}
 	
@@ -32,21 +31,18 @@ public class JInterpreterListener extends ConsoleListener {
 	 * When an object is pushed to the BaseConsole this will display it
 	 * */
 	@Override
-	public void objectReceived(SentObjectEvent e, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
 //		object.toString, but also handles arrays
 		
-		if (e.getMessage().equals("output")) {
-			baseConsole.println(JIntRuntime.getString(e.getObject()));
+		if (objectEvent.getMessage().equals("output")) {
+			baseConsole.println(JIntRuntime.getString(objectEvent.getObject()));
 		}
 		
-		String value = JIntRuntime.getString(e.getObject());
+		String value = JIntRuntime.getString(objectEvent.getObject());
 		
-		baseConsole.println(e.getMessage() + " has value: " + value);
+		baseConsole.println(objectEvent.getMessage() + " has value: " + value);
 		
 	}
-	
-	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {}
 	
 }

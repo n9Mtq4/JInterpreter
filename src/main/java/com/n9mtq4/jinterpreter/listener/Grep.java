@@ -1,33 +1,31 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.AdditionActionEvent;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.jinterpreter.utils.ArgParser;
 import com.n9mtq4.jinterpreter.utils.NoSuchValueInArgumentException;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 
 /**
  * Created by will on 7/7/15 at 11:04 PM.
  */
-public class Grep extends ConsoleListener {
+public class Grep implements ObjectListener {
 	
 	@Override
-	public void onAddition(AdditionActionEvent e) {
-		super.onAddition(e);
-	}
-	
-	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("grep")) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
 		
-		ArgParser argParser = new ArgParser(consoleActionEvent.getCommand().getArgs());
+		if (!stringParser.getArg(0).equalsIgnoreCase("grep")) return;
+		
+		ArgParser argParser = new ArgParser(stringParser.getArgs());
 		
 		String seperation = "\n";
 		if (argParser.contains("-s")) {
 			seperation = " ";
-		}else if ()
+		}
 		try {
 			seperation = argParser.getString("-s");
 		}catch (NoSuchValueInArgumentException e) {
@@ -41,5 +39,4 @@ public class Grep extends ConsoleListener {
 		}
 		
 	}
-	
 }

@@ -1,7 +1,7 @@
 package com.n9mtq4.jinterpreter.runtime;
 
-import com.n9mtq4.console.lib.BaseConsole;
 import com.n9mtq4.jinterpreter.parser.JIntParser;
+import com.n9mtq4.logwindow.BaseConsole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +38,7 @@ public class JIntRuntime {
 	}
 	
 	public void output(Object o, BaseConsole console) {
-		console.pushObject(o, "output");
+		console.push(o, "output");
 	}
 	
 	public void addVariable(JIntVariable variable) {

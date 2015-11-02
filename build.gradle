@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    compile files('JInterpreter/LogWindowApi-4.jar')
+    compile files('JInterpreter/LogWindowFramework-5.jar')
     compile files('JInterpreter/ReflectionHelper.jar')
 }
 

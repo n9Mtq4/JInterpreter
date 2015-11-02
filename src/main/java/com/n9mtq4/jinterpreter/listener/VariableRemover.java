@@ -1,27 +1,31 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.runtime.JIntVariable;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 
 /**
  * Created by will on 6/24/15 at 10:45 PM.
  */
-public class VariableRemover extends ConsoleListener {
+public class VariableRemover implements ObjectListener {
 	
 	/**
 	 * 0 = unset
 	 * 1 = variable name
 	 * */
 	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("unset")) return;
-		if (consoleActionEvent.getCommand().getLength() != 2) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
 		
-		String varName = consoleActionEvent.getCommand().getArg(1);
+		if (!stringParser.getArg(0).equalsIgnoreCase("unset")) return;
+		if (stringParser.getLength() != 2) return;
+		
+		String varName = stringParser.getArg(1);
 		JIntVariable var = JInterpreter.instance.getRuntime().getVariableByName(varName);
 		
 		if (var == null) {

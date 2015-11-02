@@ -1,15 +1,16 @@
 package com.n9mtq4.jinterpreter.listener;
 
-import com.n9mtq4.console.lib.BaseConsole;
-import com.n9mtq4.console.lib.ConsoleListener;
-import com.n9mtq4.console.lib.events.ConsoleActionEvent;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.runtime.JIntVariable;
+import com.n9mtq4.logwindow.BaseConsole;
+import com.n9mtq4.logwindow.events.ObjectEvent;
+import com.n9mtq4.logwindow.listener.ObjectListener;
+import com.n9mtq4.logwindow.utils.StringParser;
 
 /**
  * Created by will on 6/25/15 at 8:48 PM.
  */
-public class VariableDuplicator extends ConsoleListener {
+public class VariableDuplicator implements ObjectListener {
 	
 	/**
 	 * 0 = set
@@ -17,14 +18,17 @@ public class VariableDuplicator extends ConsoleListener {
 	 * 2 = old variable name
 	 * */
 	@Override
-	public void actionPerformed(ConsoleActionEvent consoleActionEvent, BaseConsole baseConsole) {
+	public void objectReceived(ObjectEvent objectEvent, BaseConsole baseConsole) {
 		
-		if (!consoleActionEvent.getCommand().getArg(0).equalsIgnoreCase("set")) return;
-		if (consoleActionEvent.getCommand().getLength() != 3) return;
-		if (!consoleActionEvent.getCommand().getArg(2).startsWith("{") || !consoleActionEvent.getCommand().getArg(2).endsWith("}")) return;
+		if (!objectEvent.isUserInputString()) return;
+		StringParser stringParser = new StringParser(objectEvent);
 		
-		String newVarName = consoleActionEvent.getCommand().getArg(1);
-		String oldVarName = consoleActionEvent.getCommand().getArg(2).substring(1, consoleActionEvent.getCommand().getArg(2).length() - 1);
+		if (!stringParser.getArg(0).equalsIgnoreCase("set")) return;
+		if (stringParser.getLength() != 3) return;
+		if (!stringParser.getArg(2).startsWith("{") || !stringParser.getArg(2).endsWith("}")) return;
+		
+		String newVarName = stringParser.getArg(1);
+		String oldVarName = stringParser.getArg(2).substring(1, stringParser.getArg(2).length() - 1);
 		
 		JIntVariable oldVar = JInterpreter.instance.getRuntime().getVariableByName(oldVarName);
 		if (oldVar == null) {

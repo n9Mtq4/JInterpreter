@@ -1,9 +1,9 @@
 package com.n9mtq4.jinterpreter.parser.clauses;
 
-import com.n9mtq4.console.lib.command.ConsoleCommand;
 import com.n9mtq4.jinterpreter.JInterpreter;
 import com.n9mtq4.jinterpreter.parser.Clause;
 import com.n9mtq4.jinterpreter.parser.ClauseParsingException;
+import com.n9mtq4.logwindow.utils.StringParser;
 import com.n9mtq4.reflection.ReflectionHelper;
 
 /**
@@ -23,12 +23,12 @@ public class NewObject implements Clause<Object> {
 	public Object evaluate(String thisClause, String[] otherClauses) throws ClauseParsingException {
 		
 //		get the class name after "new " but before the "(" ex "new String(\"Hello World\")"
-		String className = new ConsoleCommand(thisClause).getBetween("new ", "(").trim();
+		String className = new StringParser(thisClause).getBetween("new ", "(").trim();
 		
 //		now the args for the class are going to be separated by "," inside the ()'s.
 //		TODO: Doesn't support something like "new SomeObject(\"Hi\", new SomeObject("Hi", \"I will NOT work!\"))"
 //		TODO: implement a recursive loop for parentheses parsing
-		String[] sArgs = new ConsoleCommand(thisClause).getBetween(className + "(", ");").split(",");
+		String[] sArgs = new StringParser(thisClause).getBetween(className + "(", ");").split(",");
 		Object[] args = new Object[sArgs.length];
 		
 		for (int i = 0; i < sArgs.length; i++) {
